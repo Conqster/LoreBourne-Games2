@@ -14,6 +14,7 @@ namespace LoreBourne
     public class PlayerBehaviour : MonoBehaviour
     {
         private PlayerAnimation playerAnim;
+        private PlayerWeaponBehaviour weapon;
 
         [Header("Movement")]
         [SerializeField, Range(0, 10)] private float movementSpeed = 5f;
@@ -39,6 +40,10 @@ namespace LoreBourne
         [Header("Multipilers")]
         [SerializeField, Range(1, 10)] private int jumpMultiplier = 2;
 
+        [Space][Header("Combat")]
+        [SerializeField] private bool aiming;
+        [SerializeField] private bool wantToShoot;
+
         //
         //
         private float _targetRotation = 0.0f;
@@ -52,6 +57,7 @@ namespace LoreBourne
         {
             playerRigidbody = GetComponent<Rigidbody>();
             playerAnim = GetComponent<PlayerAnimation>();
+            weapon = GetComponent<PlayerWeaponBehaviour>();
         }
 
 
@@ -70,6 +76,11 @@ namespace LoreBourne
             if (jumping && !jump)
                 BackOnGround();
 
+            //if (wantToShoot && aiming)
+            //    weapon.Shoot();
+            if (wantToShoot && aiming)
+                weapon.TryToShoot();
+
             //print(jumping);
         }
 
@@ -79,6 +90,22 @@ namespace LoreBourne
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
             jump = Input.GetButtonDown("Jump");
+
+            //aiming = Input.GetButtonDown("JoyStick LT");
+            float aim = Input.GetAxis("JoyStick LT");
+            if (aim > 0.1)
+                aiming = true;
+            else
+                aiming = false;
+
+            float shootPressRT = Input.GetAxis("JoyStick RT");
+            bool shootPress = Input.GetButtonDown("Fire1");
+
+            if (shootPressRT > 0.1 || shootPress)
+                wantToShoot = true;
+            else
+                wantToShoot = false;
+            //if (aim > 0.1) ? aiming = true : aiming = false;
 
             movementInput = new Vector3(horizontalInput, 0, verticalInput);
         }
@@ -125,7 +152,7 @@ namespace LoreBourne
                 playerRigidbody.MovePosition(transform.position + targetDir.normalized * Time.deltaTime * movementSpeed);
             }
 
-            Vector3 targetMovement = new Vector3(movement.x, 0, movement.y);
+            //Vector3 targetMovement = new Vector3(movement.x, 0, movement.y);
 
             
 
@@ -133,6 +160,9 @@ namespace LoreBourne
             //a method of making the player look toward cameras direction 
 
         }
+
+
+        
 
 
 
@@ -215,6 +245,11 @@ namespace LoreBourne
         public bool Jumped()
         {
             return jumping;
+        }
+
+        public bool Aiming()
+        {
+            return aiming;
         }
 
     }

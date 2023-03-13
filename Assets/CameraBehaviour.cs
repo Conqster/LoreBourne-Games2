@@ -10,12 +10,15 @@ public class CameraBehaviour : MonoBehaviour
     [SerializeField] private float mouseInputY;
 
     [Header("Sensitivity")]
-    [SerializeField, Range(0f, 100f)] private float mouseSensitivity;
-    [SerializeField, Range(0f, 2f)] private float RightStickSensitivity;
+    [SerializeField, Range(0f, 15f)] private float mouseSensitivity;
+    [SerializeField, Range(0f, 15f)] private float rightStickSensitivity = 7.67f;
+    [SerializeField, Range(0, 15f)] private float aimSensitivity = 7.67f;
+    private float normalSensitity;
 
     [Space][Space]
     [Header("Player's Input")]
     [SerializeField] private PlayerInputType playerInputSystem;
+    [SerializeField] private PlayerBehaviour player;
     [SerializeField] private bool playerIsAiming;
 
     [Space][Header("Cameras")]
@@ -25,25 +28,19 @@ public class CameraBehaviour : MonoBehaviour
 
     [Space][Header("Set Priority Values")]
     [SerializeField, Range(0,10)] private int followCamPriority;
-    [SerializeField, Range(0,10)] private int aimCamPriority;
-
+    [SerializeField, Range(0,10)] private int  aimCamPriority;
+    [SerializeField, Range(0,10)] private int currentCamPriority;
+    
 
     [Space][Header("New New New!!!!!")]
     [SerializeField] private Transform target;
     [SerializeField] bool useTimeDeltaTime;
 
-    [Header("Cinemachine")]
-    [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-    public GameObject CinemachineCameraTarget;
-
-    [Tooltip("How far in degrees can you move the camera up")]
-    public float TopClamp = 70.0f;
-
-    [Tooltip("How far in degrees can you move the camera down")]
-    public float BottomClamp = -30.0f;
-
-    [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-    public float CameraAngleOverride = 0.0f;
+    [Header("Camera Behaviour")]
+    [SerializeField] private GameObject cameraFocus;
+    [SerializeField, Range(50,100)] private float TopClamp = 70f;
+    [SerializeField, Range(-45,-20)] private float BottomClamp = -30.0f;
+    [SerializeField] private float CameraAngleOverride = 0.0f;
 
     // cinemachine
     private float _cinemachineTargetYaw;
@@ -58,6 +55,18 @@ public class CameraBehaviour : MonoBehaviour
 
     private void Update()
     {
+
+        switch (playerInputSystem)
+        {
+            case PlayerInputType.Controller:
+                normalSensitity = rightStickSensitivity;
+                break;
+            case PlayerInputType.Keyboard:
+                normalSensitity = mouseSensitivity;
+                break;
+        }
+
+        PrioritiesCamera(ref aimCamPriority, ref followCamPriority);
         Inputs();
         //CameraRotation();
         //InputsRaw();
@@ -111,29 +120,38 @@ public class CameraBehaviour : MonoBehaviour
 
         mouseInputX = x;
         mouseInputY = y;
+
+        playerIsAiming = player.Aiming();
         //mouseInputX = Mathf.Clamp(x, -1, 1);
         //mouseInputY = Mathf.Clamp(y, -1, 1);
+    }
+
+
+    private void PrioritiesCamera(ref int aim, ref int follow)
+    {
+        //AimCam.Priority = playerIsAiming ? currentCamPriority : aim;
+        //FollowCam.Priority = !playerIsAiming ? currentCamPriority : follow;
+
+        GameObject AimCamera = AimCam.transform.gameObject;
+        bool activate = playerIsAiming ? true : false;
+        AimCamera.SetActive(activate);
+
     }
 
     private void CameraRotation()
     {
 
-        //Don't multiply mouse input by Time.deltaTime;
-        //float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-        float deltaTimeMultiplier = useTimeDeltaTime ? Time.deltaTime : 1.0f;
+        float sensitivity = playerIsAiming ? aimSensitivity : normalSensitity;
 
-        //_cinemachineTargetYaw += mouseInputX * deltaTimeMultiplier;
-        //_cinemachineTargetPitch += mouseInputY * deltaTimeMultiplier;
-
-        _cinemachineTargetYaw += mouseInputX * mouseSensitivity;
-        _cinemachineTargetPitch += mouseInputY * mouseSensitivity;
+        _cinemachineTargetYaw += mouseInputX * sensitivity;
+        _cinemachineTargetPitch += mouseInputY * sensitivity;
 
         // clamp our rotations so our values are limited 360 degrees
         _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
         _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
         // Cinemachine will follow this target
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+        cameraFocus.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
     }
 
