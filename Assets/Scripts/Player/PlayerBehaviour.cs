@@ -11,7 +11,7 @@ namespace LoreBourne
     enum PlayerInputType { Keyboard, Controller};
 
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerBehaviour : MonoBehaviour
+    public class PlayerBehaviour : Damagable
     {
         private PlayerAnimation playerAnim;
         private PlayerWeaponBehaviour weapon;

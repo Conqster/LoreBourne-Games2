@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 2560
     height: 1349.3334
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 350}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 2560
     height: 1349.3334
-  m_MinSize: {x: 875, y: 350}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 55
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 91
+  controlID: 56
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 92
+  controlID: 57
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -404,9 +404,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 4af7ffff
+      m_SelectedIDs: 6095ffff
+      m_LastClickedID: -27296
+      m_ExpandedIDs: eefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -450,8 +450,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 506.33334
-    y: 19
+    x: 505.33334
+    y: 72.66667
     width: 1570.6666
     height: 842.3333
   m_ViewDataDictionary: {fileID: 0}
@@ -463,8 +463,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: -98.666626, y: -26}
+      snapOffset: {x: -101, y: -26}
+      snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -655,9 +655,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.234329, y: 2.4230325, z: -4.221075}
+    m_Target: {x: -0.0017039776, y: 1.74186, z: 2.285}
     speed: 2
-    m_Value: {x: -1.234329, y: 2.4230325, z: -4.221075}
+    m_Value: {x: -0.0017039776, y: 1.74186, z: 2.285}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -704,13 +704,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.30972072, y: -0.023670562, z: 0.007713039, w: 0.95050216}
+    m_Target: {x: 0.24484159, y: -0.28922573, z: 0.076786, w: 0.9222391}
     speed: 2
-    m_Value: {x: 0.30972058, y: -0.02367055, z: 0.007713035, w: 0.9505017}
+    m_Value: {x: 0.24483913, y: -0.28922284, z: 0.07678523, w: 0.9222299}
   m_Size:
-    m_Target: 10.386645
+    m_Target: 4.2222137
     speed: 2
-    m_Value: 10.386645
+    m_Value: 4.2222137
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1383,22 +1383,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scripts/test
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scripts/test
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\okeja\Desktop\Games 2 coursework\LoreBourne-Games2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: fa760000
-    m_LastClickedID: 30458
-    m_ExpandedIDs: 00000000b6760000fa76000000ca9a3bffffff7f
+    m_SelectedIDs: a8700000
+    m_LastClickedID: 28840
+    m_ExpandedIDs: 00000000d46e00005e700000a270000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1426,7 +1426,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000
+    m_ExpandedIDs: 00000000d46e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1457,15 +1457,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c62300007e61000040760000c0770000ec620000f4780000bc5c0000e85c0000e25c000090620000ce73000004740000fa6e0000246f00002c6f0000286f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Manager
-      m_OriginalName: Manager
+      m_Name: HealthPickUp
+      m_OriginalName: HealthPickUp
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 30560
+      m_UserData: 50862
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1540,7 +1540,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 29244
+  m_LastSelectedObjectID: -3844
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52

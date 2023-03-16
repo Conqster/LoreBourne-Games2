@@ -189,6 +189,15 @@ namespace LoreBourne
             
         }
 
+        /// <summary>
+        /// need to implement
+        /// </summary>
+        /// <param name="value"></param>
+        public void UpdateAmmo(int value)
+        {
+
+        }
+
         public bool IsReloading()
         {
             return reloading;
