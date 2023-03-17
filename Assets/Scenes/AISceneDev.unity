@@ -2907,6 +2907,7 @@ GameObject:
   - component: {fileID: 1075803121}
   - component: {fileID: 1075803125}
   - component: {fileID: 1075803126}
+  - component: {fileID: 1075803127}
   m_Layer: 0
   m_Name: GhostPlayer
   m_TagString: Player
@@ -3000,7 +3001,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075803120}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf76843e8078ffc41b5deb81e9365eb0, type: 3}
   m_Name: 
@@ -3028,6 +3029,22 @@ NavMeshAgent:
   m_BaseOffset: 1.02
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1075803127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075803120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c29cca114b80d4c9068e4530e75581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postCreator: {fileID: 1833633709}
+  checkForDesirePost: 0
+  move: 0
+  done: []
 --- !u!1 &1122520290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5385,10 +5402,12 @@ MonoBehaviour:
   drawNodePathTarget: 0
   drawSafeZoneRayTarget: 0
   prefabPost: {fileID: 5169714055247949626, guid: c5b52eb0d3b59344b9ec732a5f5e3602, type: 3}
+  drawHeightPost: 0
   npcHeight: 1.8
   rayLength: 2.5
-  target: {fileID: 1075803124}
+  target: {fileID: 183379520}
   gameObjectInRegion: []
+  postHeightDrew: 0
 --- !u!4 &1833633710
 Transform:
   m_ObjectHideFlags: 0
