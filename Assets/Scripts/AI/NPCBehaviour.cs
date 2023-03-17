@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ConqsterAI;
+using LoreBourne;
 using UnityEngine.AI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,7 +10,7 @@ using UnityEditor;
 
 [RequireComponent(typeof(NPCVision))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class NPCBehaviour : MonoBehaviour
+public class NPCBehaviour : Damagable
 {
     private NavMeshAgent npc;
     
