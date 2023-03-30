@@ -21,14 +21,10 @@ public class AmmoPickUp : Collectable
 
     protected override void GiveItem()
     {
-        weapon.UpdateAmmo(value);
+        //weapon.UpdateAmmo(value);
         base.GiveItem();
     }
 
-    protected override void DisableMe()
-    {
-
-    }
 
     
 }

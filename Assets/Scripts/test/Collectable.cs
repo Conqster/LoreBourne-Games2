@@ -9,8 +9,9 @@ namespace LoreBourne
         //ref to player inventory 
         //ref to manager 
         [SerializeField] protected Transform target;
-        [SerializeField] protected int value;
-        [SerializeField, Range(0, 10)] protected float timeToSelfDestory;
+        [SerializeField, Range(0,20)] protected int value;
+        [SerializeField] private PickUpType type;
+        [SerializeField, Range(0, 5)] protected float timeToSelfDestory;
 
         [Space][Space]
         [Header("Collectable Behaviour")]
@@ -22,16 +23,23 @@ namespace LoreBourne
         [SerializeField, Range(0f, 4f)] protected float spinRate = 1.05f;
         protected float phase = -0.5f;
         protected float vShift = 0f;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        private Collider collider;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
         protected virtual void Start()
         {
-
+            collider = GetComponent<Collider>();
+            collider.enabled = true;
         }
+
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == target.transform)
+            if (other.gameObject.transform == target.transform)
             {
+                //print("its been triggered" + other.name);
+                collider.enabled = false;                                   // the collider is disable to avoid second trigger
                 GiveItem();
             }
         }
@@ -39,10 +47,14 @@ namespace LoreBourne
 
         protected virtual void GiveItem()
         {
-            Invoke("Disable", timeToSelfDestory);
+            TakePickUp pickUp = new TakePickUp();
+            pickUp.value = value;
+            pickUp.type = type;
+            target.SendMessage("ReceivePickUp", pickUp);
+            Invoke("DisableMe", timeToSelfDestory);
         }
 
-        protected virtual void DisableMe()
+        private void DisableMe()
         {
             Destroy(gameObject);
         }

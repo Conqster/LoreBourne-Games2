@@ -11,6 +11,8 @@ namespace LoreBourne
     {
         [Header("Health System")]
         [SerializeField, Range(0,30)] protected float health = 20;
+        [SerializeField, Range(0, 30)] protected float fullHealth = 20;
+        [SerializeField] UISystem uiSystem;
 
         protected virtual void RecieveDamage(DealDamage dmg)
         {
@@ -22,6 +24,16 @@ namespace LoreBourne
                 Hurt();
         }
 
+        protected virtual void ReceivePickUp(TakePickUp pickUp)
+        {
+            //print("testing");
+            if (pickUp.type == PickUpType.health)
+            {
+                health += pickUp.value;
+                UpdateUI();
+                print("health potion is been picked Up : " + pickUp.value);
+            }
+        }
 
         protected virtual void Death()
         {
@@ -33,6 +45,11 @@ namespace LoreBourne
         {
             //do something 
             // do Specific sound
+        }
+
+        protected virtual void UpdateUI()
+        {
+            uiSystem.HealthGuage(health, fullHealth);
         }
 
     }

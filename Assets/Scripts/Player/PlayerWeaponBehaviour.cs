@@ -193,9 +193,29 @@ namespace LoreBourne
         /// need to implement
         /// </summary>
         /// <param name="value"></param>
-        public void UpdateAmmo(int value)
+        public void ReceivePickUp(TakePickUp pickUp)
         {
+            print("testing");
+            if (pickUp.type == PickUpType.ammo)
+            {
+                bulletLeft += pickUp.value;
+                print("ammo been picked up : " + pickUp.value );
 
+            }
+        }
+
+
+        public int BulletLeft()
+        {
+            return bulletLeft;
+        }
+        public int MagLeft()
+        {
+            return magLeft;
+        }
+        public int FullMag()
+        {
+            return bulletFullMag;
         }
 
         public bool IsReloading()

@@ -8,8 +8,6 @@ using UnityEngine;
 namespace LoreBourne
 {
 
-    enum PlayerInputType { Keyboard, Controller};
-
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerBehaviour : Damagable
     {
@@ -58,20 +56,16 @@ namespace LoreBourne
             playerRigidbody = GetComponent<Rigidbody>();
             playerAnim = GetComponent<PlayerAnimation>();
             weapon = GetComponent<PlayerWeaponBehaviour>();
+            // testing 
+            UpdateUI();
         }
 
 
         private void Update()
         {
             GetPlayerInput();
-            ApplyMovement();
 
             IsGrounded();
-
-
-
-            if (jump)
-                ApplyJump();
 
             if (jumping && !jump)
                 BackOnGround();
@@ -84,6 +78,19 @@ namespace LoreBourne
             //print(jumping);
         }
 
+        protected override void RecieveDamage(DealDamage dmg)
+        {
+            base.RecieveDamage(dmg);
+            UpdateUI();
+        }
+
+        private void FixedUpdate()
+        {
+            ApplyMovement();
+
+            if (jump)
+                ApplyJump();
+        }
 
         private void GetPlayerInput()
         {

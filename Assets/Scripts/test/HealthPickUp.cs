@@ -5,13 +5,13 @@ using LoreBourne;
 
 public class HealthPickUp : Collectable
 {
-    private PlayerBehaviour player;
+    //private PlayerBehaviour player;
 
 
     protected override void Start()
     {
         base.Start();
-        player = target.GetComponent<PlayerBehaviour>();
+        //player = target.GetComponent<PlayerBehaviour>();
     }
 
 
@@ -21,8 +21,5 @@ public class HealthPickUp : Collectable
         base.GiveItem();
     }
 
-    protected override void DisableMe()
-    {
-
-    }
+    
 }
