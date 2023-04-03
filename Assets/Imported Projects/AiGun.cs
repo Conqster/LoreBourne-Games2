@@ -3,40 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using LoreBourne;
 
-public class Gun : MonoBehaviour
+public class AiGun : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 1.5f)] private float fireRate = 1;
+    [SerializeField, Range(0.5f, 3f)] private float fireRate = 1;
     [SerializeField, Range(0.5f, 1.5f)] private int damage = 1;
-    private ICharacter aCharacter;
+    private ICharacter user;
     private ICharacterAnimation animate;
 
-    [SerializeField] private Transform firePoint;
-    //[SerializeField] private Transform bulletPrefab;
+    [SerializeField] private Transform firePoint; 
 
     [Space][Space][Header("Ammunition")]
     [SerializeField, Range(0,30)] private int bulletLeft;
-    [SerializeField, Range(0, 10)] private int magLeft;
+    [SerializeField, Range(0,30)] private int magLeft;
     private int maxBulletFullMag;
     [SerializeField] private bool reloading;
 
-    [SerializeField] private bool testing;
-
-    public float timer;
+    private float timer;
     private bool aiming;
+    [SerializeField] private bool wantToShoot;
 
     private void Start()
     {
-        aCharacter = GetComponent<ICharacter>();
+        user = GetComponent<ICharacter>();
         animate = GetComponent<ICharacterAnimation>();
+
+        //intial bullet in one mag
+        maxBulletFullMag = bulletLeft; 
     }
 
     private void Update()
     {
         CheckUserIsAiming();
-
-        //logic for testing 
-        if (testing)
-            Reload();
+        CheckUserWantToShoot();
 
         TriggerShot();
     }
@@ -46,7 +44,7 @@ public class Gun : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= fireRate)
         {
-            if (Input.GetButton("Fire1") && aiming)
+            if (wantToShoot && aiming)
             {
                 timer = 0f;
                 FireGun();
@@ -54,19 +52,26 @@ public class Gun : MonoBehaviour
         }
     }
 
-
     private void CheckUserIsAiming()
     {
-        if(TryGetComponent<ICharacter>(out aCharacter))
+        if (TryGetComponent<ICharacter>(out user))
         {
-            aiming = aCharacter.IsAiming();
+            aiming = user.IsAiming();
+        }
+    }
+
+    private void CheckUserWantToShoot()
+    {
+        if (TryGetComponent<ICharacter>(out user))
+        {
+            wantToShoot = user.ShootConfirm();
         }
     }
 
 
     private void FireGun()
     {
-        if(!reloading)
+        if (!reloading)
         {
             if (bulletLeft > 0)
             {
@@ -79,6 +84,8 @@ public class Gun : MonoBehaviour
                 {
                     //Destroy(hitInfo.collider.gameObject);
                 }
+                animate.ShootingGun(fireRate);
+                bulletLeft--;
             }
             else if (bulletLeft == 0 && magLeft > 0)
             {
@@ -89,20 +96,24 @@ public class Gun : MonoBehaviour
 
     }
 
-
     private void Reload()
     {
         reloading = true;
-        if(magLeft > 0)
+        if (magLeft > 0)
         {
             animate.ReloadGun();
+            magLeft--;
+            bulletLeft = maxBulletFullMag;
         }
     }
 
-    public void ReloadingOver()
+
+    //might have to modify, currently using trigger to animate
+    // but for the character animation using bool to animate reload
+
+    public void Reloaded()
     {
         reloading = false;
     }
-
 
 }

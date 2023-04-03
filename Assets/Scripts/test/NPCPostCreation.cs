@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
 using System;
+//using Action = System.Action;
 
 
 namespace LoreBourne.AI
@@ -188,7 +189,7 @@ namespace LoreBourne.AI
             postHeightDrew = true;
         }
 
-        private IEnumerator StartDraw(Action onComplete, List<Vector3> postHeight)
+        private IEnumerator StartDraw(System.Action onComplete, List<Vector3> postHeight)
         {
             postHeightDrew = false;
             if(postHeight.Count >= 0 && !postHeightDrew)

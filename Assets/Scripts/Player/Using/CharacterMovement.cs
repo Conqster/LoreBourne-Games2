@@ -179,6 +179,12 @@ namespace LoreBourne
             return aiming;
         }
 
+        //need to remove/ find a modification
+        public bool ShootConfirm()
+        {
+            return true;
+        }
+
 
         private void JumpAnimationLogic()
         {

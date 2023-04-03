@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ConqsterAI;
+using LoreBourne.AI;
 using UnityEditor;
 
 [CustomEditor(typeof(NPCBehaviour))]

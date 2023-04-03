@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-namespace ConqsterAI
+namespace LoreBourne.AI
 {
 
     public enum BehaviourSkill
@@ -15,6 +15,7 @@ namespace ConqsterAI
         combatSkill,
         ambushSkill,
         defendSkill,
+        idleSkill,
     };
 
 

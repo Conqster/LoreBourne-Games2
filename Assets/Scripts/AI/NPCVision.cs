@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ConqsterAI;
+using LoreBourne.AI;
 
-[RequireComponent(typeof(NPCBehaviour))]
+//[RequireComponent(typeof(NPCBehaviour))]
 public class NPCVision : MonoBehaviour
 {
 
@@ -19,6 +20,8 @@ public class NPCVision : MonoBehaviour
     private Vector3 raycastDirection;
 
     private bool playerInSight;
+    private bool engage;
+    private float alertMeter;
 
     // For testing
     private float scanStart;
@@ -73,7 +76,28 @@ public class NPCVision : MonoBehaviour
         return playerInSight;
     }
 
-    
+    public bool FullAlert(float maxAlertLevel, BehaviourSkill currentBehaviour)
+    {
+        if(playerInSight)
+        {
+            alertMeter = Mathf.Clamp(alertMeter + (30f * Time.deltaTime), 0, maxAlertLevel);
+        }
+        else
+        {
+            alertMeter = Mathf.Clamp(alertMeter - (0.4f * Time.deltaTime), 0, maxAlertLevel);
+        }
+
+        if(alertMeter >= maxAlertLevel)
+        {
+            engage = true;
+        }
+        else if (currentBehaviour == BehaviourSkill.combatSkill && alertMeter <= 0)
+        {
+            engage = false;
+        }
+
+        return engage;
+    }
 
     private int ClampAngleOfVision(int visionAngle)
     {

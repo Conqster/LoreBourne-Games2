@@ -7,6 +7,7 @@ namespace LoreBourne
     public interface ICharacter
     {
         bool IsAiming();
+        bool ShootConfirm();
     }
 }
 

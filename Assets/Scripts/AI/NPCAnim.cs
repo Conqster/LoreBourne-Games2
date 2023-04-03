@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using ConqsterAI;
+using LoreBourne.AI;
+
 
 public class NPCAnim : MonoBehaviour
 {
@@ -34,7 +36,7 @@ public class NPCAnim : MonoBehaviour
 
     private void SetHash()
     {
-        moveSpeedHash = Animator.StringToHash("MoveSpeed");
+        moveSpeedHash = Animator.StringToHash("moveSpeed");
         reloadHash = Animator.StringToHash("reload");
         shootHash = Animator.StringToHash("shoot");
 

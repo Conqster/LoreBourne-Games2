@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ConqsterAI;
 using LoreBourne;
+using LoreBourne.AI;
 using UnityEngine.AI;
 #if UNITY_EDITOR
 using UnityEditor;
